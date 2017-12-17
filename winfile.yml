@@ -1,0 +1,31 @@
+---
+- hosts: web
+  tasks:
+
+  - name: Create directory structure
+    win_file:
+     path: C:\Temp\Logs
+     state: directory
+
+  - name: List directory c:\
+    win_shell: dir c:\ > C:\Temp\Logs\winfile.log
+    args:
+     executable: cmd
+
+  - name: List c:\Temp directory
+    win_shell: dir c:\Temp >> C:\Temp\Logs\winfile.log
+    args:
+     executable: cmd
+
+  - name: Get Execution Policy
+    win_shell: get-executionpolicy >> c:\Temp\Logs\winfile.log
+    args:
+     executable: powershell
+
+  - name: Run Multiple PowerShell Commands
+    win_shell: "{{ item }}"
+    with_items:
+     - Write-Host "Running Multiple commands" >> c:\Temp\Logs\winfile.log
+     - winrm get winrm/config >> c:\Temp\Logs\winfile.log
+    args:
+     executables: powershell

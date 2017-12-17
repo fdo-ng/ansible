@@ -1,0 +1,11 @@
+---
+ - name: Copy File
+   win_copy:
+     src: task1.ps1
+     state: c:\Temp\task1.ps1
+
+ - name: Deploy default iisstart.html file
+   template:
+     src: iisstart.j2
+     dest: c:\Temp\iisstart.htm
+

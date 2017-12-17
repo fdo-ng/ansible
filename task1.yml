@@ -1,0 +1,7 @@
+---
+- hosts: web
+  tasks:
+  - name: Create folder structure
+    win_file: 
+      path: c:\Temp\conf.txt
+      state: touch
